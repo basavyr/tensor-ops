@@ -1,7 +1,12 @@
 {
     "cSpell.words": [
+        "ILSVRC",
+        "imagenet",
         "nelement",
+        "preds",
         "pycache",
-        "randn"
+        "randn",
+        "resnext",
+        "tloss"
     ]
 }
