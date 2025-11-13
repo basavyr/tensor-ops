@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "huggingface",
         "ILSVRC",
         "imagenet",
         "nelement",
@@ -7,6 +8,7 @@
         "pycache",
         "randn",
         "resnext",
+        "robertp",
         "tloss"
     ]
 }

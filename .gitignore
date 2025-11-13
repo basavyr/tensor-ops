@@ -3,3 +3,4 @@ src/__pycache__
 src/repeat_interleave/__pycache__
 src/dp/.python-version
 src/dp/data
+src/imagenet-folders/.python-version
