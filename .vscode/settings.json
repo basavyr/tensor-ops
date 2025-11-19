@@ -10,6 +10,7 @@
         "preds",
         "pycache",
         "randn",
+        "relu",
         "resnext",
         "robertp",
         "tloss"
