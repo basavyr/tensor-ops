@@ -8,3 +8,5 @@ src/imagenet-folders/.python-version
 src/feature-extraction/.python-version
 src/relu_init/.python-version
 src/ddp/.python-version
+src/metal_ops/__pycache__
+src/metal_ops/.python-version
