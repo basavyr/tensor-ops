@@ -11,3 +11,4 @@ src/ddp/.python-version
 src/metal_ops/__pycache__
 src/metal_ops/.python-version
 src/mps_profile/.python-version
+src/nccl/.python-version
