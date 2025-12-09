@@ -4,10 +4,10 @@ from torch.utils.flop_counter import FlopCounterMode
 
 
 class Model(torch.nn.Module):
-    def __init__(self, input_dim: int, output_dim: int) -> None:
+    def __init__(self, input_dim: int, output_dim: int, use_bias: bool = False) -> None:
         super(Model, self).__init__()
         self.linear = torch.nn.Linear(
-            in_features=input_dim, out_features=output_dim)
+            in_features=input_dim, out_features=output_dim, bias=use_bias)
 
     def forward(self, x: torch.Tensor):
         x = x.view(x.shape[0], -1).contiguous()
@@ -74,7 +74,8 @@ if __name__ == "__main__":
     assert flops_builtin == flops, ValueError("Inconsistent FLOP estimation")
 
     print(f'{"="*80}\nSimulating GEMM with `model(x)`')
-    model = Model(input_dim=A.shape[1], output_dim=B.shape[1])
+    model = Model(input_dim=A.shape[1], output_dim=B.shape[1], use_bias=False)
+    print(model)
     flop_counter = FlopCounterMode(display=True, depth=1)
     A.requires_grad_(False)
     with flop_counter:
