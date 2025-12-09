@@ -14,3 +14,7 @@ src/mps_profile/.python-version
 src/nccl/.python-version
 src/tensor_cloud/.python-version
 src/flops-test/.python-version
+src/tensor_rpc/.python-version
+src/tensor_cloud/.python-version
+src/tensor_cloud/*.safetensor
+src/tensor_cloud/*.pth
