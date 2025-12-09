@@ -12,3 +12,5 @@ src/metal_ops/__pycache__
 src/metal_ops/.python-version
 src/mps_profile/.python-version
 src/nccl/.python-version
+src/tensor_cloud/.python-version
+src/flops-test/.python-version
