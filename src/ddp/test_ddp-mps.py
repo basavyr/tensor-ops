@@ -8,29 +8,26 @@ def run(rank, size):
     os.environ['MASTER_ADDR'] = '127.0.0.1'
     os.environ['MASTER_PORT'] = '29502'
     os.environ['GLOO_SOCKET_IFNAME'] = 'lo0'
-    try:
-        dist.init_process_group("gloo", rank=rank, world_size=size)
 
-        if not torch.backends.mps.is_available():
-            print(f"Rank {rank}: MPS not available")
-            return
+    dist.init_process_group("gloo", rank=rank, world_size=size)
 
-        # Try MPS
-        device = torch.device("mps")
-        tensor = torch.ones(1).to(device) * (rank + 1)
-        print(f"Rank {rank}: Tensor on {tensor.device}")
+    if not torch.backends.mps.is_available():
+        print(f"Rank {rank}: MPS not available")
+        return
 
-        # Manual move to CPU for Gloo
-        cpu_tensor = tensor.cpu()
-        dist.all_reduce(cpu_tensor)
-        tensor.copy_(cpu_tensor)
+    # Try MPS
+    device = torch.device("mps")
+    tensor = torch.ones((5,)).to(device)
+    print(f"Rank {rank}: Tensor {tensor} on {tensor.device}")
 
-        print(f"Rank {rank} success: {tensor.item()}")
-    except Exception as e:
-        print(f"Rank {rank} failed: {e}")
-    finally:
-        if dist.is_initialized():
-            dist.destroy_process_group()
+    # Manual move to CPU for Gloo
+    cpu_tensor = tensor.cpu()
+    dist.all_reduce(cpu_tensor, op=dist.ReduceOp.SUM)
+    print(f'All reduce: {rank}: {cpu_tensor}')
+    tensor.copy_(cpu_tensor)
+
+    if dist.is_initialized():
+        dist.destroy_process_group()
 
 
 if __name__ == "__main__":
